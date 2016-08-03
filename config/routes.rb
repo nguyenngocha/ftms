@@ -62,4 +62,8 @@ Rails.application.routes.draw do
   resources :user_tasks, only: :update
   resources :notifications, only: :index
   patch "update_notifications" => "notifications#update"
+
+  resources :messages, only: :index
+
+  mount ActionCable.server => '/cable'
 end
