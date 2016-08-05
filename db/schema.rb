@@ -123,6 +123,7 @@ ActiveRecord::Schema.define(version: 20160805012928) do
 
   create_table "messages", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "content"
+    t.boolean  "read"
     t.integer  "chat_room_id"
     t.integer  "user_id"
     t.datetime "created_at",   null: false

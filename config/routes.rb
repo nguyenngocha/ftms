@@ -62,4 +62,6 @@ Rails.application.routes.draw do
   resources :user_tasks, only: :update
   resources :notifications, only: :index
   patch "update_notifications" => "notifications#update"
+
+  resources :scrollings
 end
