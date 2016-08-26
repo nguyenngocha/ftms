@@ -1,5 +1,5 @@
 <div id="subjects-form">
-  <%= form_for [:admin, @subject] do |f| %>
+  <%= form_for [@namespace.to_sym, @subject] do |f| %>
     <div class="row">
       <%= render "shared/error_messages", object: @subject %>
       <div class="title"><%= @subject.name %></div>

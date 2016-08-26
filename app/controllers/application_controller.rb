@@ -2,6 +2,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   before_action :authenticate_user!, :set_locale, except: :home
+  before_action :get_namespace
 
   add_breadcrumb I18n.t("breadcrumbs.paths"), :root_path
 
@@ -45,5 +46,9 @@ class ApplicationController < ActionController::Base
     Subject.human_attribute_name "description"
     Subject.human_attribute_name "courses"
     Subject.human_attribute_name "task_masters"
+  end
+
+  def get_namespace
+    @namespace = self.class.parent.to_s.downcase
   end
 end

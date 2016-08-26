@@ -27,18 +27,17 @@
           <ul class="dropdown-menu dropdown-menu-right"
             aria-labelledby="dLabel">
             <li>
-              <a  href="<%= edit_admin_subject_path @subject %>">
+              <%= link_to eval("edit_#{@namespace}_subject_path @subject") do %>
                 <i class="fa fa-pencil" aria-hidden="true"></i>
                 <%= t"courses.buttons.admin.edit" %>
-              </a>
+              <% end %>
             </li>
             <li>
-              <a href="<%= admin_subject_path @subject %>",
-                data-method="delete",
-                data-confirm="<%= t "messages.delete.confirm" %>">
-                <i class="fa fa-trash" aria-hidden="true"></i>
-                <%= t "button.delete" %>
-              </a>
+            <%= link_to eval("#{@namespace}_subject_path @subject"),
+              data: {method: :delete, confirm: t("messages.delete.confirm")} do %>
+              <i class="fa fa-trash" aria-hidden="true"></i>
+              <%= t "button.delete" %>
+            <% end %>
             </li>
           </ul>
       </div>
@@ -54,7 +53,8 @@
         </tr>
       </thead>
       <tbody>
-        <%= render @task_masters %>
+        <%= render partial: "admin/task_masters/task_master", 
+          collection: @task_masters, as: :task_master %>
       </tbody>
     </table>
   </div>
