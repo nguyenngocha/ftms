@@ -41,13 +41,16 @@ class CoursesDatatable
     current_user = @view.current_user
     @courses = @namespace == Settings.namespace_roles.admin ? Course.all : current_user.courses
     courses = @courses.order("#{sort_column} #{sort_direction}")
-      .where("name like :search", search: "%#{params[:sSearch]}%")
+      .where("courses.name like :search", search: "%#{params[:sSearch]}%")
       .per_page_kaminari(page).per per_page
 
     if params[:sSearch_3].present?
       courses = courses.where "status = :search", search: "#{params[:sSearch_3]}"
+    elsif params[:sSearch_2].present?
+      courses = courses.joins(:user_courses, users: :roles)
+        .where "users.id = :search AND role_type = 1", search: "#{params[:sSearch_2]}"
     end
-    courses
+    courses.distinct
   end
 
   def page

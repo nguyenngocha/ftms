@@ -6,6 +6,7 @@ class User < ApplicationRecord
     AND courses.id <> :course_id) AND profiles.programming_language_id =
     :programming_language_id"
 
+  include PublicActivity::Model
   mount_uploader :avatar, ImageUploader
 
   belongs_to :trainer, class_name: User.name, foreign_key: :trainer_id

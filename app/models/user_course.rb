@@ -29,6 +29,8 @@ class UserCourse < ApplicationRecord
   def create_user_subjects_when_assign_new_user
     if user.is_trainee?
       create_user_subjects [self], course.course_subjects, course_id
+      user.create_activity key: "course.assign_new_user", owner: current_user,
+        recipient: course
     end
   end
 end

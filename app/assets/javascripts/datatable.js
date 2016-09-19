@@ -23,6 +23,18 @@ function set_datatable(selector, not_order_column, dom) {
       searchPlaceholder: I18n.t("datatables.search_name"),
       sLengthMenu: I18n.t("datatables.show_menu")
     }
+    "fnInitComplete": function (o ,j) {
+        var trainers = {};
+
+  $('td:nth-child(3)>a').map(function(e){return trainers[$(e).attr('href')
+    .charAt( $(e).attr('href').length - 1 )] = $(e).attr('title')});
+  $.each(trainers, function (key, value) {
+    $('select[rel = 2]').append($('<option>'), {
+      value: e.key,
+      title: e.value
+    });
+  });
+    }
   });
 }
 
