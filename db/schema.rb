@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160907035808) do
+ActiveRecord::Schema.define(version: 20160921032804) do
 
   create_table "activities", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "trackable_type"
@@ -121,6 +121,21 @@ ActiveRecord::Schema.define(version: 20160907035808) do
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
     t.index ["user_id"], name: "index_feed_backs_on_user_id", using: :btree
+  end
+
+  create_table "histories", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "owner_id"
+    t.string   "owner_type"
+    t.string   "action_type"
+    t.integer  "target_id"
+    t.string   "target_type"
+    t.integer  "recipient_id"
+    t.string   "recipient_type"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.index ["owner_id", "owner_type"], name: "index_histories_on_owner_id_and_owner_type", using: :btree
+    t.index ["recipient_id", "recipient_type"], name: "index_histories_on_recipient_id_and_recipient_type", using: :btree
+    t.index ["target_id", "target_type"], name: "index_histories_on_target_id_and_target_type", using: :btree
   end
 
   create_table "locations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
